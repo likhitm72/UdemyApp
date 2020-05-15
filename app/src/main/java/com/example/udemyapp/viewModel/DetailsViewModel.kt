@@ -1,13 +1,18 @@
 package com.example.udemyapp.viewModel
 
+import android.app.Application
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.udemyapp.model.DogBreed
+import com.example.udemyapp.model.DogDatabase
+import kotlinx.coroutines.launch
 
-class DetailsViewModel:ViewModel() {
+class DetailsViewModel(application: Application):BaseViewModel(application) {
     var dog=MutableLiveData<DogBreed>()
-    fun fetch(){
-        var dogBreed=DogBreed("1","Dalmation","15","xyz","PET","MILD","XYZ")
-        dog.value=dogBreed
+    fun fetch(dogId:Int){
+        launch {
+            var dao=DogDatabase(getApplication()).dogDao()
+            dog.value=dao.getDog(dogId)
+        }
     }
 }

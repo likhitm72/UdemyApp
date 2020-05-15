@@ -22,7 +22,7 @@ class ListViewModel(application: Application):BaseViewModel(application) {
     var loading= MutableLiveData<Boolean>()
     val dogApiService=DogApiService()
     val disposable=CompositeDisposable()
-    private var refreshTime=5*60*1000*1000*1000L
+    private var refreshTime=10*1000*1000*1000L
 
 
     fun refresh(){
@@ -69,8 +69,6 @@ class ListViewModel(application: Application):BaseViewModel(application) {
 
                 })
         )
-
-
     }
 
 
